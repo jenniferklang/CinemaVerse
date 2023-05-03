@@ -47,6 +47,7 @@ router.post("/admin", async (req, res) => {
     });
   }
 });
+/*
 router.post("/api/books", async (req, res) => {
   let sql =
     "INSERT INTO bok (bokTitel, bokForfattare, bokIsbn, bokPris, bokKategoriId) VALUES (?,?,?,?,?)";
@@ -75,7 +76,8 @@ router.post("/api/books", async (req, res) => {
       error: error.message,
     });
   }
-});
+});*/
+
 router.put("/api/books", async (req, res) => {
   let sql =
     "UPDATE bok SET bokTitel = ?, bokForfattare = ?, bokIsbn = ?, bokPris = ? WHERE bokId = ?";
@@ -104,14 +106,14 @@ router.put("/api/books", async (req, res) => {
     });
   }
 });
-router.delete("/api/books", async (req, res) => {
+router.delete("/admin", async (req, res) => {
   console.log(req.body);
-  let sql = "DELETE FROM bok WHERE bokId = ?";
+  let deleteJunc = "DELETE FROM movieGenre WHERE movieGenreMId = ?";
 
   try {
     await connection.query(
-      sql,
-      [req.body.bokId],
+      deleteJunc,
+      [req.body.movieId],
       function (error, results, fields) {
         if (error) {
           if (error) throw error;
@@ -119,7 +121,30 @@ router.delete("/api/books", async (req, res) => {
         return res.status(201).json({
           success: true,
           error: "",
-          message: "Boken är nu raderad!",
+          message: "Filmgenren är nu raderad!",
+        });
+      }
+    );
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+
+  let sql = "DELETE FROM movie WHERE movieId = ?";
+  try {
+    await connection.query(
+      sql,
+      [req.body.movieId],
+      function (error, results, fields) {
+        if (error) {
+          if (error) throw error;
+        }
+        return res.status(201).json({
+          success: true,
+          error: "",
+          message: "Filmen är nu raderad!",
         });
       }
     );
@@ -130,6 +155,7 @@ router.delete("/api/books", async (req, res) => {
     });
   }
 });
+
 router.get("/api/books-categories", async (req, res) => {
   let sql =
     "SELECT * FROM kategori INNER JOIN bok ON kategori.kategoriId = bok.bokKategoriId";
