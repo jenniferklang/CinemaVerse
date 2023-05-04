@@ -65,12 +65,17 @@ VALUES (1),
        (5);
 
 
-INSERT INTO movie (movieName, movieLengthMin, movieDescription, movieSaloonId, movieRatingId)
-VALUES ('The Dark Night', 152, 'Batman battles the Joker in Gotham City', 1, 4),
-       ('Forrest Gump', 142,'Forrest Gump tells his life story and experiences historical events',3, 4),
-       ('The Hangover', 100, 'Three friends search for their missing friend after a whild bachelor party in Las Vegas', 1, 3),
-       ('Silence of the lambs', 118, 'A FBI trainee seeks the help of a cannibalistic serialkiller to catch another killer on the loose', 3, 5),
-       ('The Notebook', 123, 'A man reads to a woman with alzheimer about their past love story', 2, 5);
+INSERT INTO movie (movieName, movieLengthMin, movieDescription, movieSaloonId, movieRatingId,movieImg)
+VALUES ('The Dark Knight', 152, 'Batman battles the Joker in Gotham City', 1, 4, 'thedarkknight.jpg'),
+       ('Forrest Gump', 142,'Forrest Gump tells his life story and experiences historical events',3, 4,'forrestgump.jpg'),
+       ('The Hangover', 100, 'Three friends search for their missing friend after a whild bachelor party in Las Vegas', 1, 3,'thehangover.jpg'),
+       ('Silence of the lambs', 118, 'A FBI trainee seeks the help of a cannibalistic serialkiller to catch another killer on the loose', 3, 5,'silenceofthelambs.jpg'),
+       ('The Notebook', 123, 'A man reads to a woman with alzheimer about their past love story', 2, 5, 'thenotebook.jpg');
+
+
+UPDATE movie SET movieImg = 'silenceofthelambs.jpg'
+WHERE movieId=4;
+
 
 INSERT INTO movieGenre (movieGenreMId, movieGenreGId)
 VALUES (1, 1),
@@ -84,7 +89,25 @@ SELECT movie.movieName, genre.genreName FROM movie
 INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
 INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId;
 
+SELECT * FROM movie
+INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
+INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId
+INNER JOIN saloon ON movie.movieSaloonId = saloon.saloonId
+INNER JOIN rating ON movie.movieRatingId = rating.ratingId;
+
+SELECT * FROM movie
+INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
+INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId
+LEFT JOIN saloon ON movie.movieSaloonId = saloon.saloonId
+LEFT JOIN rating ON movie.movieRatingId = rating.ratingId;
+
 CREATE UNIQUE INDEX index_movieName ON movie(movieName);
+
+UPDATE movie SET movieRatingId=1
+WHERE movieId=1;
+
+
+
 
 -- reset DB Stored procedure
 DELIMITER //
@@ -105,12 +128,13 @@ PRIMARY KEY (movieId),
 FOREIGN KEY (movieSaloonId) REFERENCES saloon(saloonId),
 FOREIGN KEY (movieRatingId) REFERENCES rating(ratingId)
 );
-INSERT INTO movie (movieName, movieLengthMin, movieDescription, movieSaloonId, movieRatingId)
-VALUES ('The Dark Night', 152, 'Batman battles the Joker in Gotham City', 1, 4),
-       ('Forrest Gump', 142,'Forrest Gump tells his life story and experiences historical events',3, 4),
-       ('The Hangover', 100, 'Three friends search for their missing friend after a whild bachelor party in Las Vegas', 1, 3),
-       ('Silence of the lambs', 118, 'A FBI trainee seeks the help of a cannibalistic serialkiller to catch another killer on the loose', 3, 5),
-       ('The Notebook', 123, 'A man reads to a woman with alzheimer about their past love story', 2, 5);
+INSERT INTO movie (movieName, movieLengthMin, movieDescription, movieSaloonId, movieRatingId, movieImg)
+VALUES ('The Dark Knight', 152, 'Batman battles the Joker in Gotham City', 1, 4, 'thedarkknight.jpg'),
+       ('Forrest Gump', 142,'Forrest Gump tells his life story and experiences historical events',3, 4,'forrestgump.jpg'),
+       ('The Hangover', 100, 'Three friends search for their missing friend after a whild bachelor party in Las Vegas', 1, 3,'thehangover.jpg'),
+       ('Silence of the lambs', 118, 'A FBI trainee seeks the help of a cannibalistic serialkiller to catch another killer on the loose', 3, 5,'silenceofthelambs.jpg'),
+       ('The Notebook', 123, 'A man reads to a woman with alzheimer about their past love story', 2, 5, 'thenotebook.jpg');
+
 CREATE TABLE movieGenre(
     movieGenreId   INT NOT NULL AUTO_INCREMENT,
     movieGenreMId INT,
@@ -129,5 +153,7 @@ VALUES (1, 1),
 CREATE UNIQUE INDEX index_movieName ON movie(movieName);
 END //
 
+
+DROP PROCEDURE ResetDb;
 
 CALL ResetDb();

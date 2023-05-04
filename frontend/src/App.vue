@@ -16,13 +16,13 @@
   <nav>
     <ul>
       <li>
-        <RouterLink to="/">Hem</RouterLink>
+        <RouterLink to="/">Home</RouterLink>
       </li>
       <li>
-        <RouterLink to="/about">Om</RouterLink>
+        <RouterLink to="/movie">Movie</RouterLink>
       </li>
       <li>
-        <RouterLink to="/contact">Kontakt</RouterLink>
+        <RouterLink to="/admin">Admin</RouterLink>
       </li>
     </ul>
   </nav>

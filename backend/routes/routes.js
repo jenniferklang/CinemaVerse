@@ -6,13 +6,12 @@ router.get("/movie", async (req, res) => {
   let sql = `SELECT * FROM movie
   INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
   INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId
-  INNER JOIN saloon ON movie.movieSaloonId = saloon.saloonId
-  INNER JOIN rating ON movie.movieRatingId = rating.ratingId;`;
+  LEFT JOIN saloon ON movie.movieSaloonId = saloon.saloonId
+  LEFT JOIN rating ON movie.movieRatingId = rating.ratingId;`;
   try {
-    await connection.query(sql, function (error, results, fields) {
-      if (error) {
-        if (error) throw error;
-      }
+    connection.query(sql, (error, results, fields) => {
+      if (error) throw error;
+
       res.json(results);
     });
   } catch (error) {
@@ -33,12 +32,10 @@ router.post("/admin", async (req, res) => {
     req.body.movieRatingId,
     req.body.movieImg,
   ];
-  console.log(req.body);
   try {
-    await connection.query(sql, params, function (error, results, fields) {
-      if (error) {
-        if (error) throw error;
-      }
+    connection.query(sql, params, (error, results, fields) => {
+      if (error) throw error;
+
       res.json(results);
     });
   } catch (error) {
@@ -46,59 +43,45 @@ router.post("/admin", async (req, res) => {
       error: error.message,
     });
   }
-});
-/*
-router.post("/api/books", async (req, res) => {
-  let sql =
-    "INSERT INTO bok (bokTitel, bokForfattare, bokIsbn, bokPris, bokKategoriId) VALUES (?,?,?,?,?)";
-  let params = [
-    req.body.bokTitel,
-    req.body.bokForfattare,
-    req.body.bokIsbn,
-    req.body.bokPris,
-    req.body.bokKategoriId,
-  ];
+
+  let postJunc =
+    "INSERT INTO movieGenre (movieGenreMId, movieGenreGId) VALUES (?,?)";
 
   try {
-    await connection.query(sql, params, function (error, results, fields) {
-      if (error) {
+    connection.query(
+      postJunc,
+      [req.body.movieGenreMId, req.body.movieGenreGId],
+      (error, results, fields) => {
         if (error) throw error;
+
+        res.json(results);
       }
-      return res.status(201).json({
-        success: true,
-        error: "",
-        message: "Du har lagt till en ny bok!",
-      });
-    });
+    );
   } catch (error) {
     return res.status(500).json({
-      success: false,
       error: error.message,
     });
   }
-});*/
+});
 
-router.put("/api/books", async (req, res) => {
-  let sql =
-    "UPDATE bok SET bokTitel = ?, bokForfattare = ?, bokIsbn = ?, bokPris = ? WHERE bokId = ?";
-  let params = [
-    req.body.bokTitel,
-    req.body.bokForfattare,
-    req.body.bokIsbn,
-    req.body.bokPris,
-    req.body.bokId,
-  ];
+router.put("/admin", async (req, res) => {
+  let sql = `UPDATE movie SET movieRatingId=?
+    WHERE movieId=?`;
+  const { movieRatingId, movieId } = req.body;
 
   try {
-    await connection.query(sql, params, function (error, results, fields) {
-      if (error) {
+    connection.query(
+      sql,
+      [movieRatingId, movieId],
+      function (error, results, fields) {
         if (error) throw error;
+
+        return res.status(201).json({
+          success: true,
+          error: "",
+        });
       }
-      return res.status(201).json({
-        success: true,
-        error: "",
-      });
-    });
+    );
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -111,13 +94,12 @@ router.delete("/admin", async (req, res) => {
   let deleteJunc = "DELETE FROM movieGenre WHERE movieGenreMId = ?";
 
   try {
-    await connection.query(
+    connection.query(
       deleteJunc,
       [req.body.movieId],
-      function (error, results, fields) {
-        if (error) {
-          if (error) throw error;
-        }
+      (error, results, fields) => {
+        if (error) throw error;
+
         return res.status(201).json({
           success: true,
           error: "",
@@ -134,41 +116,18 @@ router.delete("/admin", async (req, res) => {
 
   let sql = "DELETE FROM movie WHERE movieId = ?";
   try {
-    await connection.query(
-      sql,
-      [req.body.movieId],
-      function (error, results, fields) {
-        if (error) {
-          if (error) throw error;
-        }
-        return res.status(201).json({
-          success: true,
-          error: "",
-          message: "Filmen är nu raderad!",
-        });
-      }
-    );
+    connection.query(sql, [req.body.movieId], (error, results, fields) => {
+      if (error) throw error;
+
+      return res.status(201).json({
+        success: true,
+        error: "",
+        message: "Filmen är nu raderad!",
+      });
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      error: error.message,
-    });
-  }
-});
-
-router.get("/api/books-categories", async (req, res) => {
-  let sql =
-    "SELECT * FROM kategori INNER JOIN bok ON kategori.kategoriId = bok.bokKategoriId";
-
-  try {
-    await connection.query(sql, function (error, results, fields) {
-      if (error) {
-        if (error) throw error;
-      }
-      res.json(results);
-    });
-  } catch (error) {
-    return res.status(500).json({
       error: error.message,
     });
   }
