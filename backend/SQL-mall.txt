@@ -1,4 +1,3 @@
-
 CREATE TABLE genre(
     genreId   INT NOT NULL AUTO_INCREMENT,
     genreName VARCHAR(50),
@@ -25,7 +24,7 @@ movieLengthMin INT,
 movieDescription VARCHAR (250),
 movieSaloonId INT,
 movieRatingId INT,
-movieImg VARCHAR (250),
+movieImg VARCHAR(250),
 PRIMARY KEY (movieId),
 FOREIGN KEY (movieSaloonId) REFERENCES saloon(saloonId),
 FOREIGN KEY (movieRatingId) REFERENCES rating(ratingId)
@@ -85,3 +84,50 @@ SELECT movie.movieName, genre.genreName FROM movie
 INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
 INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId;
 
+CREATE UNIQUE INDEX index_movieName ON movie(movieName);
+
+-- reset DB Stored procedure
+DELIMITER //
+CREATE PROCEDURE ResetDb ()
+    BEGIN
+
+DROP TABLE movieGenre;
+DROP TABLE movie;
+CREATE TABLE movie(
+movieId INT NOT NULL AUTO_INCREMENT,
+movieName VARCHAR (50),
+movieLengthMin INT,
+movieDescription VARCHAR (250),
+movieSaloonId INT,
+movieRatingId INT,
+movieImg VARCHAR(250),
+PRIMARY KEY (movieId),
+FOREIGN KEY (movieSaloonId) REFERENCES saloon(saloonId),
+FOREIGN KEY (movieRatingId) REFERENCES rating(ratingId)
+);
+INSERT INTO movie (movieName, movieLengthMin, movieDescription, movieSaloonId, movieRatingId)
+VALUES ('The Dark Night', 152, 'Batman battles the Joker in Gotham City', 1, 4),
+       ('Forrest Gump', 142,'Forrest Gump tells his life story and experiences historical events',3, 4),
+       ('The Hangover', 100, 'Three friends search for their missing friend after a whild bachelor party in Las Vegas', 1, 3),
+       ('Silence of the lambs', 118, 'A FBI trainee seeks the help of a cannibalistic serialkiller to catch another killer on the loose', 3, 5),
+       ('The Notebook', 123, 'A man reads to a woman with alzheimer about their past love story', 2, 5);
+CREATE TABLE movieGenre(
+    movieGenreId   INT NOT NULL AUTO_INCREMENT,
+    movieGenreMId INT,
+    movieGenreGId INT,
+    PRIMARY KEY (movieGenreId),
+    FOREIGN KEY (movieGenreMId) REFERENCES movie(movieId),
+    FOREIGN KEY (movieGenreGId) REFERENCES genre(genreId)
+);
+INSERT INTO movieGenre (movieGenreMId, movieGenreGId)
+VALUES (1, 1),
+       (2, 2),
+       (3, 3),
+       (4, 5),
+       (5, 4),
+       (5, 2);
+CREATE UNIQUE INDEX index_movieName ON movie(movieName);
+END //
+
+
+CALL ResetDb();
