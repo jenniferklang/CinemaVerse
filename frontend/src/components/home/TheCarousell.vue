@@ -30,7 +30,7 @@
   <div id="wrapper">
     <carousel :items-to-show="1">
       <slide v-for="slide in data" :key="slide">
-        <RouterLink :to="String(slide.movieId)">
+        <RouterLink :to="'/movie/' + slide.movieId">
           <img class="carousel-item" :src="slide.movieImg" />
         </RouterLink>
       </slide>
