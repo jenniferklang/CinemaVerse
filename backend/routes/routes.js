@@ -3,15 +3,47 @@ const connection = require('../connection')
 const router = express.Router()
 
 router.get('/movie', async (req, res) => {
-  let sql = `SELECT *, GROUP_CONCAT(genre.genreName)
-  FROM genre INNER JOIN movieGenre ON genre.genreId = movieGenre.movieGenreGId
-  INNER JOIN movie ON movieGenre.movieGenreMId = movie.movieId
-  GROUP BY movie.movieId;`
+  let sql = `SELECT * FROM movie
+  INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
+  INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId
+  LEFT JOIN saloon ON movie.movieSaloonId = saloon.saloonId
+  LEFT JOIN rating ON movie.movieRatingId = rating.ratingId;`
   try {
     connection.query(sql, (error, results, fields) => {
       if (error) throw error
 
       res.json(results)
+    })
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+    })
+  }
+})
+
+router.get('/movie/:id', async (req, res) => {
+  const { id } = req.params
+
+  let sql = `
+    SELECT * FROM movie
+    INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
+    INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId
+    LEFT JOIN saloon ON movie.movieSaloonId = saloon.saloonId
+    LEFT JOIN rating ON movie.movieRatingId = rating.ratingId
+    WHERE movie.movieId = ?;
+  `
+
+  try {
+    connection.query(sql, [id], (error, results, fields) => {
+      if (error) throw error
+
+      if (results.length === 0) {
+        return res.status(404).json({
+          error: 'Movie not found',
+        })
+      }
+
+      res.status(200).json(results[0])
     })
   } catch (error) {
     return res.status(500).json({
@@ -31,6 +63,7 @@ router.post('/admin', async (req, res) => {
     req.body.movieRatingId,
     req.body.movieImg,
   ]
+
   try {
     connection.query(sql, params, (error, results, fields) => {
       if (error) throw error
