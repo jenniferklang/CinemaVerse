@@ -18,7 +18,15 @@
       NavbarComponent
     },
     created() {
-      this.movieExtra()
+      this.$watch(
+        () => this.$route.params,
+        () => {
+          this.movieExtra()
+        },
+        // fetch the data when the view is created and the data is
+        // already being observed
+        { immediate: true }
+      )
     },
     data() {
       return {
