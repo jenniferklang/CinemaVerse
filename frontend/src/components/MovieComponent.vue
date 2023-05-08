@@ -33,21 +33,21 @@
         movie: {}
       }
     },
-    methods:{
+    methods: {
       async movieExtra() {
-      const id = this.$route.params.id
-      try {
-        const response = await fetch(`http://localhost:3000/movie/${id}`)
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`)
+        const id = this.$route.params.id
+        try {
+          const response = await fetch(`http://localhost:3000/movie/${id}`)
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+          }
+          this.movie = await response.json()
+        } catch (error) {
+          console.error('Error fetching movie data:', error)
+          // Puedes manejar errores específicos o mostrar un mensaje de error en la interfaz de usuario aquí
         }
-        this.movie = await response.json()
-      } catch (error) {
-        console.error('Error fetching movie data:', error)
-        // Puedes manejar errores específicos o mostrar un mensaje de error en la interfaz de usuario aquí
       }
     }
-    },
     // async movieExtra() {
     //   const id = this.$route.params.id
     //   try {

@@ -5,7 +5,7 @@
         <router-link to="/">Home</router-link>
       </li>
       <li>
-        <router-link to="/movie/1">Movie</router-link>
+        <router-link to="/movie/:id?">Movie</router-link>
       </li>
     </ul>
   </div>
