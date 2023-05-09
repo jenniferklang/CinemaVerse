@@ -1,15 +1,16 @@
 <script>
   import CitiesList from './components/CitiesList.vue'
-  import CounterButton from './components/CounterButton.vue'
+
   import HelloWorld from './components/HelloWorld.vue'
   import RandomImage from './components/RandomImage.vue'
+  import AddMovie from './components/AddMovie.vue'
 
   export default {
     components: {
       CitiesList,
-      CounterButton,
       HelloWorld,
-      RandomImage
+      RandomImage,
+      AddMovie
     }
   }
 </script>
@@ -33,8 +34,9 @@
   <RandomImage />
   <HelloWorld />
   <CitiesList />
-  <CounterButton />
-  
+
+  <AddMovie />
+
   <main>
     <RouterView />
     

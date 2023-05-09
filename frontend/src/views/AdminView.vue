@@ -1,1 +1,3 @@
-<template><h1>Admin</h1></template>
+<template>
+  <h1>Admin</h1>
+</template>

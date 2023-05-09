@@ -13,7 +13,7 @@ export default createRouter({
     },
     {
       component: MovieView,
-      path: '/movie'
+      path: '/movie/:id?'
     },
     {
       component: HomeView,
