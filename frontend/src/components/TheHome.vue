@@ -21,6 +21,7 @@
         const response = await fetch('http://localhost:3000/movie')
         const result = await response.json()
         this.data = result
+        console.log(this.data)
       }
     }
   }
@@ -30,10 +31,11 @@
   <div id="wrapper">
     <carousel :items-to-show="1">
       <slide v-for="slide in data" :key="slide">
-        <RouterLink :to="'/movie/' + slide.movieId">
-          <img class="carousel-item" :src="slide.movieImg" />
-        </RouterLink>
+        <RouterLink :to="'/movie/' + slide.movieId"
+          ><img :src="slide.movieImg"
+        /></RouterLink>
       </slide>
+
       <template #addons>
         <navigation />
         <pagination />
@@ -43,10 +45,6 @@
 </template>
 
 <style scoped>
-  #wrapper {
-    min-height: 100vh;
-    background-color: black;
-  }
   /* To find and change the navigation arrow color. Press ctrl + shift ´+ f
   search after "fill" and choose the carousel.css file. Then restart the server.
   */

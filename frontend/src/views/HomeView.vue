@@ -1,6 +1,5 @@
 <script>
-  import TheCarousell from '../components/home/TheCarousell.vue'
-
+  import TheCarousell from '../components/TheHome.vue'
   export default {
     components: {
       TheCarousell
