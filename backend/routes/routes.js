@@ -1,6 +1,7 @@
 const express = require("express");
 const connection = require("../connection");
 const router = express.Router();
+const cors = require("cors");
 
 router.get("/movie", async (req, res) => {
   let sql = `SELECT * FROM movie
@@ -21,7 +22,7 @@ router.get("/movie", async (req, res) => {
   }
 });
 
-router.post("/admin", async (req, res) => {
+router.post("/admin", cors(), async (req, res) => {
   let sql =
     "INSERT INTO movie (movieName, movieLengthMin, movieDescription, movieSaloonId, movieRatingId, movieImg) VALUES (?,?,?,?,?,?)";
   let params = [
@@ -54,7 +55,7 @@ router.post("/admin", async (req, res) => {
       (error, results, fields) => {
         if (error) throw error;
 
-        res.json(results);
+        /*res.json(results);*/
       }
     );
   } catch (error) {

@@ -1,13 +1,15 @@
 <script>
   import CitiesList from './components/CitiesList.vue'
-  import CounterButton from './components/CounterButton.vue'
+
   import HelloWorld from './components/HelloWorld.vue'
+  import AddMovie from './components/AddMovie.vue'
 
   export default {
     components: {
       CitiesList,
-      CounterButton,
-      HelloWorld
+
+      HelloWorld,
+      AddMovie
     }
   }
 </script>
@@ -28,7 +30,8 @@
   </nav>
   <HelloWorld msg="Hello World!" />
   <CitiesList />
-  <CounterButton />
+
+  <AddMovie />
   <main>
     <RouterView />
   </main>
