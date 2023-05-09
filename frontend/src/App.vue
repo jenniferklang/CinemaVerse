@@ -32,6 +32,7 @@
   <CitiesList />
 
   <AddMovie />
+
   <main>
     <RouterView />
   </main>

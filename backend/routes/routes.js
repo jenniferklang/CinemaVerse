@@ -22,7 +22,69 @@ router.get("/movie", async (req, res) => {
   }
 });
 
-router.post("/admin", cors(), async (req, res) => {
+router.get("/movie/:id", async (req, res) => {
+  const { id } = req.params;
+
+  let sql = `
+    SELECT * FROM movie
+    INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
+    INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId
+    LEFT JOIN saloon ON movie.movieSaloonId = saloon.saloonId
+    LEFT JOIN rating ON movie.movieRatingId = rating.ratingId
+    WHERE movie.movieId = ?;
+  `;
+
+  try {
+    connection.query(sql, [id], (error, results, fields) => {
+      if (error) throw error;
+
+      if (results.length === 0) {
+        return res.status(404).json({
+          error: "Movie not found",
+        });
+      }
+
+      res.status(200).json(results[0]);
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+    });
+  }
+});
+
+router.get("/movie/:id", async (req, res) => {
+  const { id } = req.params;
+
+  let sql = `
+    SELECT * FROM movie
+    INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
+    INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId
+    LEFT JOIN saloon ON movie.movieSaloonId = saloon.saloonId
+    LEFT JOIN rating ON movie.movieRatingId = rating.ratingId
+    WHERE movie.movieId = ?;
+  `;
+
+  try {
+    connection.query(sql, [id], (error, results, fields) => {
+      if (error) throw error;
+
+      if (results.length === 0) {
+        return res.status(404).json({
+          error: "Movie not found",
+        });
+      }
+
+      res.status(200).json(results[0]);
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+    });
+  }
+});
+
+router.post("/admin", async (req, res) => {
   let sql =
     "INSERT INTO movie (movieName, movieLengthMin, movieDescription, movieSaloonId, movieRatingId, movieImg) VALUES (?,?,?,?,?,?)";
   let params = [
@@ -33,6 +95,7 @@ router.post("/admin", cors(), async (req, res) => {
     req.body.movieRatingId,
     req.body.movieImg,
   ];
+
   try {
     connection.query(sql, params, (error, results, fields) => {
       if (error) throw error;
@@ -56,6 +119,7 @@ router.post("/admin", cors(), async (req, res) => {
         if (error) throw error;
 
         /*res.json(results);*/
+        res.json(results);
       }
     );
   } catch (error) {
