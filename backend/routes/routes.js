@@ -64,6 +64,17 @@ router.post("/admin", async (req, res) => {
   }
 });
 
+router.post("/adminReset", async (req, res) => {
+  try {
+    await connection.query("CALL ResetDb();");
+
+    res.status(200).send("Databasen har återställts");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Något gick fel");
+  }
+});
+
 router.put("/admin", async (req, res) => {
   let sql = `UPDATE movie SET movieRatingId=?
     WHERE movieId=?`;
@@ -92,7 +103,7 @@ router.put("/admin", async (req, res) => {
 router.delete("/admin", async (req, res) => {
   console.log(req.body);
   let deleteJunc = "DELETE FROM movieGenre WHERE movieGenreMId = ?";
-
+  console.log("movieId" + req.body.movieId);
   try {
     connection.query(
       deleteJunc,
@@ -100,11 +111,11 @@ router.delete("/admin", async (req, res) => {
       (error, results, fields) => {
         if (error) throw error;
 
-        return res.status(201).json({
-          success: true,
-          error: "",
-          message: "Filmgenren är nu raderad!",
-        });
+        // return res.status(201).json({
+        //   success: true,
+        //   error: "",
+        //   message: "Filmgenren är nu raderad!",
+        // });
       }
     );
   } catch (error) {
