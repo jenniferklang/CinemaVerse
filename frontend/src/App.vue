@@ -39,3 +39,16 @@
     <RouterView />
   </main>
 </template>
+
+<style>
+  @font-face {
+    font-family: 'Jost';
+    src: url('../assets/Jost-Regular.ttf') format('truetype');
+  }
+  body {
+    background-color: #232b2b;
+    font-family: 'Jost', Arial, Helvetica, sans-serif;
+    color: #dddada;
+    font-size: 20px;
+  }
+</style>
