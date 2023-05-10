@@ -83,6 +83,7 @@ export default {
         .then(response => response.json())
         .then(data => {
           console.log('Deleted movie:', data);
+
         })
         .catch(error => {
           console.error('Error deleting movie rating:', error);
@@ -92,7 +93,4 @@ export default {
 
 
 };
-// this.movies = this.movies.filter((movie) => movie.movieId !== this.selectedMovie);
-//         this.selectedMovie = this.movies.length > 0 ? this.movies[0].movieId : null;
-//         this.selectedRating = null;
 </script>
