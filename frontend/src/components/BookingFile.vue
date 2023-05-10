@@ -22,6 +22,9 @@
     methods: {
       async postDate() {
         const response = await fetch('http://localhost:3000/bookings', {
+          headers: {
+            'Content-Type': 'application/json'
+          },
           method: 'post',
           body: JSON.stringify({ date: this.date })
         })
