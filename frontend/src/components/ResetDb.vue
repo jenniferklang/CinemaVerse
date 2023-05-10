@@ -21,7 +21,7 @@ export default {
 </script>
 
 <template>
-<h1>Testar Reset</h1>
+
 <div>
   <button @click="resetDb()">Reset Database</button>
 </div>

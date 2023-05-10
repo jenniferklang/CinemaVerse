@@ -1,16 +1,16 @@
 <script>
-  import CitiesList from './components/CitiesList.vue'
 
-  import HelloWorld from './components/HelloWorld.vue'
+
+
   import RandomImage from './components/RandomImage.vue'
-  import AddMovie from './components/AddMovie.vue'
+
 
   export default {
     components: {
-      CitiesList,
-      HelloWorld,
+
+
       RandomImage,
-      AddMovie
+
     }
   }
 </script>
@@ -30,10 +30,7 @@
     </ul>
   </nav>
   <RandomImage />
-  <HelloWorld />
-  <CitiesList />
 
-  <AddMovie />
 
   <main>
     <RouterView />
