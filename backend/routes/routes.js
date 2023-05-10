@@ -3,6 +3,13 @@ const connection = require("../connection");
 const router = express.Router();
 const cors = require("cors");
 
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  Connection: "keep-alive",
+  methods: ["POST", "GET", "UPDATE", "PUT", "DELETE"],
+};
+
 router.get("/movie", async (req, res) => {
   let sql = `SELECT * FROM movie
   INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
@@ -53,6 +60,17 @@ router.get("/movie/:id", async (req, res) => {
   }
 });
 
+router.post("/adminReset", async (req, res) => {
+  try {
+    await connection.query("CALL ResetDb();");
+
+    res.status(200).send("Databasen har återställts");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Något gick fel");
+  }
+});
+
 router.get("/movie/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -84,7 +102,7 @@ router.get("/movie/:id", async (req, res) => {
   }
 });
 
-router.post("/admin", async (req, res) => {
+router.post("/admin", cors(corsOptions), async (req, res) => {
   let sql =
     "INSERT INTO movie (movieName, movieLengthMin, movieDescription, movieSaloonId, movieRatingId, movieImg) VALUES (?,?,?,?,?,?)";
   let params = [
@@ -119,7 +137,7 @@ router.post("/admin", async (req, res) => {
         if (error) throw error;
 
         /*res.json(results);*/
-        res.json(results);
+        // res.json(results)
       }
     );
   } catch (error) {
@@ -129,20 +147,10 @@ router.post("/admin", async (req, res) => {
   }
 });
 
-router.post("/adminReset", async (req, res) => {
-  try {
-    await connection.query("CALL ResetDb();");
-
-    res.status(200).send("Databasen har återställts");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Något gick fel");
-  }
-});
-
-router.put("/admin", async (req, res) => {
+router.put("/admin", cors(corsOptions), async (req, res) => {
   let sql = `UPDATE movie SET movieRatingId=?
     WHERE movieId=?`;
+  console.log(req.body);
   const { movieRatingId, movieId } = req.body;
 
   try {
@@ -165,10 +173,15 @@ router.put("/admin", async (req, res) => {
     });
   }
 });
-router.delete("/admin", async (req, res) => {
+// router.delete('/admin', cors(corsOptions), async (req, res) => {
+//   console.log(req.body)
+//   let deleteJunc = 'DELETE FROM movieGenre WHERE movieGenreMId = ?'
+//   console.log('movieId' + req.body.movieId)
+// })
+router.delete("/admin", cors(corsOptions), async (req, res) => {
   console.log(req.body);
   let deleteJunc = "DELETE FROM movieGenre WHERE movieGenreMId = ?";
-  console.log("movieId" + req.body.movieId);
+
   try {
     connection.query(
       deleteJunc,

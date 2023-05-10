@@ -9,13 +9,16 @@
     <p>Genre: {{ movie.genreName }}</p>
     <img :src="movie.movieImg" :alt="movie.movieName" />
   </div>
+  <BookingFile />
 </template>
 
 <script>
   import NavbarComponent from '../components/NavbarComponent.vue'
+  import BookingFile from './BookingFile.vue'
   export default {
     components: {
-      NavbarComponent
+      NavbarComponent,
+      BookingFile
     },
     created() {
       this.$watch(

@@ -142,6 +142,7 @@
           },
           method: 'POST'
         })
+        console.log(this.movies)
         console.log(this.movies.length)
       }
     }

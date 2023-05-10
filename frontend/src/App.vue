@@ -20,7 +20,6 @@
     <ul>
       <li>
         <RouterLink to="/">Home</RouterLink>
-
       </li>
       <li>
         <RouterLink to="/movie">Movie</RouterLink>
@@ -29,13 +28,11 @@
         <RouterLink to="/admin">Admin</RouterLink>
       </li>
     </ul>
-
   </nav>
   <RandomImage />
 
 
   <main>
     <RouterView />
-
   </main>
 </template>
