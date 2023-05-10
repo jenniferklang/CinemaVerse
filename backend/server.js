@@ -7,7 +7,7 @@ const corsOptions = {
   origin: "*",
   credentials: true, //access-control-allow-credentials:true
   Connection: "keep-alive",
-  methods: ["POST", "GET"],
+  methods: ["POST", "GET", "PUT", "DELETE"],
 };
 
 const bodyParser = require("body-parser");

@@ -175,12 +175,6 @@ router.delete("/admin", async (req, res) => {
       [req.body.movieId],
       (error, results, fields) => {
         if (error) throw error;
-
-        // return res.status(201).json({
-        //   success: true,
-        //   error: "",
-        //   message: "Filmgenren är nu raderad!",
-        // });
       }
     );
   } catch (error) {

@@ -1,4 +1,4 @@
-<template>
+<template> <div id="container">
   <form @submit.prevent="updateMovieRating">
     <select v-model="selectedMovieId">
       <option v-for="movie in movies" :key="movie.movieId" :value="movie.movieId">{{ movie.movieName }}</option>
@@ -11,6 +11,7 @@
     <button type="submit">Update rating</button>
     <button type="button" @click.prevent="deleteMovie">Delete Movie</button>
   </form>
+</div>
 </template>
 
 <script>
@@ -68,45 +69,30 @@ export default {
      },
 
      deleteMovie() {
-      const { selectedMovieId, selectedMovieRating } = this;
+
       fetch('http://localhost:3000/admin', {
-        method: 'PUT',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          movieId: selectedMovieId,
-          movieRatingId: selectedMovieRating,
+          movieGenreMId: this.selectedMovieId,
+          movieId: this.selectedMovieId,
         }),
       })
         .then(response => response.json())
         .then(data => {
-          console.log('Updated movie rating:', data);
+          console.log('Deleted movie:', data);
         })
         .catch(error => {
-          console.error('Error updating movie rating:', error);
+          console.error('Error deleting movie rating:', error);
         });
      },
-
-
-    //async deleteMovie() {
-    //   try {
-
-    //     const response = await fetch('http://localhost:3000/admin', {
-    //       method: 'DELETE',
-
-    //       body: JSON.stringify({
-    //       movieGenreMId: this.selectedMovieId,
-    //       movieId: this.selectedMovieId,
-    //     })
-    //     });
-    //     const data = await response.json();
-    //     console.log(data);
-
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // },
   },
+
+
 };
+// this.movies = this.movies.filter((movie) => movie.movieId !== this.selectedMovie);
+//         this.selectedMovie = this.movies.length > 0 ? this.movies[0].movieId : null;
+//         this.selectedRating = null;
 </script>
