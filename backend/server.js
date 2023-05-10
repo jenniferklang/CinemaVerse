@@ -1,35 +1,35 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
-const movieRoutes = require('./routes/routes')
-const port = 3000
-const mongoRoute = require('./routes/mongo-route')
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const movieRoutes = require("./routes/routes");
+const port = 3000;
+const mongoRoute = require("./routes/mongo-route");
 const corsOptions = {
-  origin: '*',
+  origin: "*",
   credentials: true, //access-control-allow-credentials:true
-  Connection: 'keep-alive',
-  methods: ['POST', 'GET'],
-}
+  Connection: "keep-alive",
+  methods: ["POST", "GET", "PUT", "DELETE"],
+};
 
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const start = async () => {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/bookingDb')
-    console.log('connected')
+    await mongoose.connect("mongodb://127.0.0.1:27017/bookingDb");
+    console.log("connected");
   } catch (error) {
-    console.error(error)
-    process.exit(1)
+    console.error(error);
+    process.exit(1);
   }
-}
-start()
+};
+start();
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(cors(corsOptions))
-app.use('/', cors(corsOptions), movieRoutes)
-app.use('/', cors(corsOptions), mongoRoute)
+app.use(cors(corsOptions));
+app.use("/", cors(corsOptions), movieRoutes);
+app.use("/", cors(corsOptions), mongoRoute);
 // app.post('/books', async (req, res) => {
 //   let bookTitle = req.body.bokTitel
 //   let bookAuthor = req.body.bokForfattare
@@ -59,4 +59,4 @@ app.use('/', cors(corsOptions), mongoRoute)
 //   }
 // })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));

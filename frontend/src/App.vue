@@ -1,16 +1,16 @@
 <script>
-  import CitiesList from './components/CitiesList.vue'
 
-  import HelloWorld from './components/HelloWorld.vue'
+
+
   import RandomImage from './components/RandomImage.vue'
-  import AddMovie from './components/AddMovie.vue'
+
 
   export default {
     components: {
-      CitiesList,
-      HelloWorld,
+
+
       RandomImage,
-      AddMovie
+
     }
   }
 </script>
@@ -30,12 +30,22 @@
     </ul>
   </nav>
   <RandomImage />
-  <HelloWorld />
-  <CitiesList />
 
-  <AddMovie />
 
   <main>
     <RouterView />
   </main>
 </template>
+
+<style>
+  @font-face {
+    font-family: 'Jost';
+    src: url('../assets/Jost-Regular.ttf') format('truetype');
+  }
+  body {
+    background-color: #232b2b;
+    font-family: 'Jost', Arial, Helvetica, sans-serif;
+    color: #dddada;
+    font-size: 20px;
+  }
+</style>
