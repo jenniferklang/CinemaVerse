@@ -2,16 +2,15 @@
 
 
 
-  import RandomImage from './components/RandomImage.vue'
+  import FooterComponent from './components/FooterComponent.vue';
+import RandomImage from './components/RandomImage.vue'
 
 
   export default {
     components: {
-
-
-      RandomImage,
-
-    }
+    RandomImage,
+    FooterComponent
+}
   }
 </script>
 
@@ -31,18 +30,20 @@
   </nav>
   <RandomImage />
 
-
   <main>
     <RouterView />
+    <FooterComponent />
   </main>
 </template>
 
 <style>
+
   @font-face {
     font-family: 'Jost';
     src: url('../assets/Jost-Regular.ttf') format('truetype');
   }
   body {
+
     background-color: #232b2b;
     font-family: 'Jost', Arial, Helvetica, sans-serif;
     color: #dddada;

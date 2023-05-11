@@ -7,22 +7,30 @@ export default {
         const response = await fetch("http://localhost:3000/adminReset", {
           method: "POST" });
         if (response.ok) {
-          alert("Databasen har återställts");
+          alert("Database reset");
+          location.reload()
         } else {
-          throw new Error("Något gick fel");
+          throw new Error("Something went wrong");
         }
       } catch (error) {
         console.error(error);
-        alert("Något gick fet");
+        alert("Something went wrong");
       }
     },
   },
 };
 </script>
 
+
 <template>
 
 <div>
-  <button @click="resetDb()">Reset Database</button>
+
+  <input
+            class="btn-btn-primary"
+            @click="resetDb()"
+            type="button"
+            value="Reset Database"
+          />
 </div>
 </template>

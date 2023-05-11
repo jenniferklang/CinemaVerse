@@ -1,18 +1,4 @@
-<template> <div id="container">
-  <form @submit.prevent="updateMovieRating">
-    <select v-model="selectedMovieId">
-      <option v-for="movie in movies" :key="movie.movieId" :value="movie.movieId">{{ movie.movieName }}</option>
-    </select>
 
-    <select v-model="selectedMovieRating">
-      <option v-for="rating in ratings" :key="rating" :value="rating">{{ rating }}</option>
-    </select>
-
-    <button type="submit">Update rating</button>
-    <button type="button" @click.prevent="deleteMovie">Delete Movie</button>
-  </form>
-</div>
-</template>
 
 <script>
 export default {
@@ -62,6 +48,8 @@ export default {
         .then(response => response.json())
         .then(data => {
           console.log('Updated movie rating:', data);
+          alert('Rating updated');
+
         })
         .catch(error => {
           console.error('Error updating movie rating:', error);
@@ -83,6 +71,9 @@ export default {
         .then(response => response.json())
         .then(data => {
           console.log('Deleted movie:', data);
+          alert('Movie Deleted');
+          location.reload();
+
 
         })
         .catch(error => {
@@ -94,3 +85,37 @@ export default {
 
 };
 </script>
+
+
+
+
+<template>
+
+    <form @submit="updateMovieRating">
+      <div id="containerdropd">
+      <select v-model="selectedMovieId">
+      <option v-for="movie in movies" :key="movie.movieId" :value="movie.movieId">{{ movie.movieName }}</option>
+    </select>
+    <select v-model="selectedMovieRating">
+      <option v-for="rating in ratings" :key="rating" :value="rating">{{ rating }}</option>
+    </select>
+  </div>
+
+
+
+  <input
+            class="btn-btn-primary"
+            type="submit"
+            value="Update rating"
+          />
+
+          <input
+            class="btn-btn-primary"
+            @click="deleteMovie"
+            type="button"
+            value="Delete Movie"
+          />
+
+  </form>
+
+</template>
