@@ -31,13 +31,16 @@
 </script>
 
 <template>
-  <h1>hi</h1>
   <button @click="sortByName">Sort by name</button>
   <button @click="sortByRating">Sort by rating</button>
   <div v-for="movie in data" :key="movie.movieId">
-    <p>{{ movie.movieName }}</p>
+    <RouterLink :to="'/movie/' + movie.movieId">
+      <p>{{ movie.movieName }}</p>
+    </RouterLink>
     <p>Rating: {{ movie.ratingNumber }}</p>
-    <img :src="movie.movieImg" />
+    <RouterLink :to="'/movie/' + movie.movieId">
+      <img :src="movie.movieImg" />
+    </RouterLink>
   </div>
 </template>
 
@@ -45,5 +48,12 @@
   img {
     width: 100%;
     max-width: 600px;
+  }
+  div {
+    margin-bottom: 30px;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 </style>
