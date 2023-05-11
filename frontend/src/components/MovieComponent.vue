@@ -9,7 +9,7 @@
     <p>Genre: {{ movie.genreName }}</p>
     <img :src="movie.movieImg" :alt="movie.movieName" />
   </div>
-  <BookingFile />
+  <BookingFile :saloon="movie.saloonName" />
 </template>
 
 <script>

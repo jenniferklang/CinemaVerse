@@ -14,6 +14,8 @@
 
 
 <template><h1>Admin</h1>
-<ResetDb />
+
 <UpdateMovie />
+<ResetDb />
+
 </template>
