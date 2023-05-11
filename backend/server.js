@@ -4,11 +4,12 @@ const cors = require('cors')
 const movieRoutes = require('./routes/routes')
 const port = 3000
 const mongoRoute = require('./routes/mongo-route')
+const sortingRoutes = require('./routes/sorting-routes')
 const corsOptions = {
   origin: '*',
   credentials: true, //access-control-allow-credentials:true
   Connection: 'keep-alive',
-  methods: ['POST', 'GET'],
+  methods: ['POST', 'GET', 'PUT', 'DELETE'],
 }
 
 const bodyParser = require('body-parser')
@@ -30,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors(corsOptions))
 app.use('/', cors(corsOptions), movieRoutes)
 app.use('/', cors(corsOptions), mongoRoute)
+app.use('/', cors(corsOptions), sortingRoutes)
 // app.post('/books', async (req, res) => {
 //   let bookTitle = req.body.bokTitel
 //   let bookAuthor = req.body.bokForfattare
