@@ -26,6 +26,9 @@
       <li>
         <RouterLink to="/admin">Admin</RouterLink>
       </li>
+      <li>
+        <RouterLink to="/movies">See movies</RouterLink>
+      </li>
     </ul>
   </nav>
   <RandomImage />

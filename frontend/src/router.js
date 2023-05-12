@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from './views/HomeView.vue'
 import MovieView from './views/MovieView.vue'
 import AdminView from './views/AdminView.vue'
+import AllMoviesView from './views/MoviesView.vue'
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -18,6 +19,10 @@ export default createRouter({
     {
       component: HomeView,
       path: '/'
+    },
+    {
+      component: AllMoviesView,
+      path: '/movies'
     }
   ]
 })
