@@ -3,13 +3,13 @@
 
 
   import FooterComponent from './components/FooterComponent.vue';
-import RandomImage from './components/RandomImage.vue'
+
 
 
   export default {
     components: {
-    RandomImage,
-    FooterComponent
+      
+  FooterComponent
 }
   }
 </script>
