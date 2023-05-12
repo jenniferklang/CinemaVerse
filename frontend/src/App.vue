@@ -12,24 +12,6 @@
 
 <template>
   <NavbarComponent />
-  <FooterComponent />
-
-  <nav>
-    <ul>
-      <li>
-        <RouterLink to="/">Home</RouterLink>
-      </li>
-      <li>
-        <RouterLink to="/movie">Movie</RouterLink>
-      </li>
-      <li>
-        <RouterLink to="/admin">Admin</RouterLink>
-      </li>
-      <li>
-        <RouterLink to="/movies">See movies</RouterLink>
-      </li>
-    </ul>
-  </nav>
 
   <main>
     <RouterView />
@@ -47,6 +29,7 @@
     font-family: 'Jost', Arial, Helvetica, sans-serif;
     color: #dddada;
     font-size: 20px;
+    margin: 0;
   }
   .btn-btn-primary {
     padding: 5px 10px 5px 10px;

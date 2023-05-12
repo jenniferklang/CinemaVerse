@@ -6,7 +6,7 @@
         src="../../assets/pictures/cinema-dessert-fastfood-svgrepo-com.png"
       />
     </RouterLink>
-    <RouterLink class="navbar-brand" to="/">Cinema Verse</RouterLink>
+    <RouterLink class="navbar-brand" to="/">CinemaVerse</RouterLink>
     <button
       class="navbar-toggler"
       type="button"
@@ -29,9 +29,9 @@
         <li class="nav-item">
           <RouterLink class="nav-link" to="/">Home</RouterLink>
         </li>
-        <!-- <li class="nav-item">
-          <RouterLink class="nav-link" to="/movie">Movie</RouterLink>
-        </li> -->
+        <li class="nav-item">
+          <RouterLink class="nav-link" to="/movies">All movies</RouterLink>
+        </li>
         <li class="nav-item">
           <RouterLink class="nav-link" to="/admin">Admin</RouterLink>
         </li>
@@ -66,7 +66,7 @@
 
 <style>
   .navbar {
-    margin: 0;
+    margin-bottom: 15%;
     padding: 10px;
   }
   #popcornlogg {

@@ -33,27 +33,25 @@
 </script>
 
 <template>
-
   <div class="container">
     <img style="width: 100%" :src="selectedImage" alt="" />
-<img :src="'playbtn.png'" class="overlay" />
-    
+    <img :src="'playbtn.png'" class="overlay" />
   </div>
-  
 </template>
 
 <style>
-.container {
+  .container {
     position: relative;
-}
-.overlay {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .overlay {
     position: absolute;
     width: 50px;
     height: 50px;
     left: 50%;
     top: 50%;
-    margin-left: -25px; 
-    margin-top: -25px; 
-}
-
+    margin-left: -25px;
+    margin-top: -25px;
+  }
 </style>
