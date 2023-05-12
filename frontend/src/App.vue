@@ -1,22 +1,18 @@
 <script>
-
-
-
   import RandomImage from './components/RandomImage.vue'
-
+  import NavbarComponent from './components/NavbarComponent.vue'
 
   export default {
     components: {
-
-
       RandomImage,
-
+      NavbarComponent
     }
   }
 </script>
 
 <template>
-  <nav>
+   <NavbarComponent />
+  <!-- <nav>
     <ul>
       <li>
         <RouterLink to="/">Home</RouterLink>
@@ -28,7 +24,7 @@
         <RouterLink to="/admin">Admin</RouterLink>
       </li>
     </ul>
-  </nav>
+  </nav> -->
   <RandomImage />
 
 

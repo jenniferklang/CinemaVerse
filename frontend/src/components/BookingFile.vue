@@ -1,21 +1,26 @@
 <template>
-  <Datepicker
-    v-model="date"
-    input-class="customClass"
-    :inline="true"
-    @selected="parentfunctionSelectedhandler"
-    :disabled-dates="disabledDates"
-  />
-  {{
-    date.toLocaleDateString('sv-SE', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric'
-    })
-  }}
-  {{ saloon }}
-  <!-- {{ disabledDates.dates }} -->
-  <button @click="postDate">Boka datum</button>
+  <div id="datePickerBox">
+    <Datepicker
+      id="datePicker"
+      v-model="date"
+      input-class="customClass"
+      :inline="true"
+      @selected="parentfunctionSelectedhandler"
+      :disabled-dates="disabledDates"
+    />
+    {{
+      date.toLocaleDateString('sv-SE', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      })
+    }}
+    {{ saloon }}
+    <!-- {{ disabledDates.dates }} -->
+    <button type="button" class="btn btn-outline-success" @click="postDate">
+      Boka datum
+    </button>
+  </div>
 </template>
 <script>
   // import { json } from 'stream/consumers'
@@ -74,3 +79,15 @@
     }
   }
 </script>
+
+<style>
+  #datePickerBox {
+    width: 80%;
+    margin-left: 9%;
+  }
+  .btn {
+    width: 90%;
+    margin: 10% 0 10% 5%;
+
+  }
+</style>

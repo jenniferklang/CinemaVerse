@@ -1,23 +1,23 @@
 <template>
   <NavbarComponent />
-  <div>
-    <h1>{{ movie.movieName }}</h1>
-    <p>Duration: {{ movie.movieLengthMin }} minutes</p>
-    <p>Description: {{ movie.movieDescription }}</p>
-    <p>Saloon: {{ movie.saloonName }} ({{ movie.saloonChairs }} chairs)</p>
-    <p>Rating: {{ movie.ratingNumber }}</p>
-    <p>Genre: {{ movie.genreName }}</p>
-    <img :src="movie.movieImg" :alt="movie.movieName" />
+  <div id="description">
+    <h1 id="movieName">{{ movie.movieName }}</h1>
+    <p class="descriptionText">Duration: {{ movie.movieLengthMin }} minutes</p>
+    <p class="descriptionText">Description: {{ movie.movieDescription }}</p>
+    <p class="descriptionText">
+      Saloon: {{ movie.saloonName }} ({{ movie.saloonChairs }} chairs)
+    </p>
+    <p class="descriptionText">Rating: {{ movie.ratingNumber }}</p>
+    <p class="descriptionText">Genre: {{ movie.genreName }}</p>
+    <img id="moviePicture" :src="movie.movieImg" :alt="movie.movieName" />
   </div>
   <BookingFile :saloon="movie.saloonName" />
 </template>
 
 <script>
-  import NavbarComponent from '../components/NavbarComponent.vue'
   import BookingFile from './BookingFile.vue'
   export default {
     components: {
-      NavbarComponent,
       BookingFile
     },
     created() {
@@ -26,8 +26,6 @@
         () => {
           this.movieExtra()
         },
-        // fetch the data when the view is created and the data is
-        // already being observed
         { immediate: true }
       )
     },
@@ -47,22 +45,26 @@
           this.movie = await response.json()
         } catch (error) {
           console.error('Error fetching movie data:', error)
-          // Puedes manejar errores específicos o mostrar un mensaje de error en la interfaz de usuario aquí
         }
       }
     }
-    // async movieExtra() {
-    //   const id = this.$route.params.id
-    //   try {
-    //     const response = await fetch(`http://localhost:3000/movie/${id}`)
-    //     if (!response.ok) {
-    //       throw new Error(`HTTP error! Status: ${response.status}`)
-    //     }
-    //     this.movie = await response.json()
-    //   } catch (error) {
-    //     console.error('Error fetching movie data:', error)
-    //     // Puedes manejar errores específicos o mostrar un mensaje de error en la interfaz de usuario aquí
-    //   }
-    // }
   }
 </script>
+
+<style>
+  #movieName {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+  .descriptionText {
+    width: 90%;
+    margin-left: 5%;
+  }
+  #moviePicture {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10%;
+  }
+</style>
