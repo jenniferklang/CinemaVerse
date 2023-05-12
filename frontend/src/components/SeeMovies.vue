@@ -56,4 +56,10 @@
     text-decoration: none;
     color: inherit;
   }
+  button {
+    background-color: #414a4c;
+    color: #dddada;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
 </style>
