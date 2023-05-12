@@ -29,7 +29,7 @@
 
 <template>
   <div id="wrapper">
-    <carousel id="slide-container" :items-to-show="2">
+    <carousel id="slide-container" :items-to-show="1.5">
       <slide v-for="slide in data" :key="slide">
         <RouterLink :to="'/movie/' + slide.movieId"
           ><img :src="slide.movieImg"

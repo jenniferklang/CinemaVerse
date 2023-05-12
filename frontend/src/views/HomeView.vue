@@ -1,6 +1,7 @@
 <script>
-  import RandomImage from '../components/RandomImage.vue'
   import TheCarousell from '../components/TheHome.vue'
+  import RandomImage from '../components/RandomImage.vue'
+
   export default {
     components: {
       TheCarousell,
