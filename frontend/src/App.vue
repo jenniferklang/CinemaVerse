@@ -1,16 +1,10 @@
 <script>
-
-
-
-  import FooterComponent from './components/FooterComponent.vue';
-import RandomImage from './components/RandomImage.vue'
-
+  import FooterComponent from './components/FooterComponent.vue'
 
   export default {
     components: {
-    RandomImage,
-    FooterComponent
-}
+      FooterComponent
+    }
   }
 </script>
 
@@ -28,7 +22,6 @@ import RandomImage from './components/RandomImage.vue'
       </li>
     </ul>
   </nav>
-  <RandomImage />
 
   <main>
     <RouterView />
@@ -37,16 +30,21 @@ import RandomImage from './components/RandomImage.vue'
 </template>
 
 <style>
-
   @font-face {
     font-family: 'Jost';
     src: url('../assets/Jost-Regular.ttf') format('truetype');
   }
   body {
-
     background-color: #232b2b;
     font-family: 'Jost', Arial, Helvetica, sans-serif;
     color: #dddada;
     font-size: 20px;
+  }
+  .btn-btn-primary {
+    padding: 5px 10px 5px 10px;
+
+    line-height: 30px;
+
+    border-radius: 40px;
   }
 </style>
