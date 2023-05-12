@@ -29,7 +29,7 @@
 
 <template>
   <div id="wrapper">
-    <carousel :items-to-show="1">
+    <carousel id="slide-container" :items-to-show="1.5">
       <slide v-for="slide in data" :key="slide">
         <RouterLink :to="'/movie/' + slide.movieId"
           ><img :src="slide.movieImg"
@@ -48,8 +48,21 @@
   /* To find and change the navigation arrow color. Press ctrl + shift ´+ f
   search after "fill" and choose the carousel.css file. Then restart the server.
   */
+
+  #wrapper {
+    background-color: #232b2b;
+  }
+
+  #slide-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
   img {
-    max-width: 338px;
-    max-height: 500px;
+    max-width: 80%;
   }
 </style>

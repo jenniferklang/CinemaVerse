@@ -5,6 +5,7 @@ import MovieView from './views/MovieView.vue'
 import AdminView from './views/AdminView.vue'
 import AboutView from './views/AboutView.vue'
 import ContactView from './views/ContactView.vue'
+import AllMoviesView from './views/MoviesView.vue'
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -28,6 +29,10 @@ export default createRouter({
     {
       component: ContactView,
       path: '/contact'
+    },
+    {
+      component: AllMoviesView,
+      path: '/movies'
     }
   ]
 })

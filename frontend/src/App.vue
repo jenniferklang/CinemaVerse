@@ -1,18 +1,20 @@
 <script>
-  import RandomImage from './components/RandomImage.vue'
   import NavbarComponent from './components/NavbarComponent.vue'
+  import FooterComponent from './components/FooterComponent.vue'
 
   export default {
     components: {
-      RandomImage,
-      NavbarComponent
+      NavbarComponent,
+      FooterComponent
     }
   }
 </script>
 
 <template>
-   <NavbarComponent />
-  <!-- <nav>
+  <NavbarComponent />
+  <FooterComponent />
+
+  <nav>
     <ul>
       <li>
         <RouterLink to="/">Home</RouterLink>
@@ -23,13 +25,15 @@
       <li>
         <RouterLink to="/admin">Admin</RouterLink>
       </li>
+      <li>
+        <RouterLink to="/movies">See movies</RouterLink>
+      </li>
     </ul>
-  </nav> -->
-  <RandomImage />
-
+  </nav>
 
   <main>
     <RouterView />
+    <FooterComponent />
   </main>
 </template>
 
@@ -44,4 +48,12 @@
     color: #dddada;
     font-size: 20px;
   }
+  .btn-btn-primary {
+    padding: 5px 10px 5px 10px;
+
+    line-height: 30px;
+
+    border-radius: 40px;
+  }
 </style>
+-->

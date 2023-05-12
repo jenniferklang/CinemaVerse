@@ -1,28 +1,48 @@
-
 <script>
-export default {
-  methods: {
-    async resetDb() {
-      try {
-        const response = await fetch("http://localhost:3000/adminReset", {
-          method: "POST" });
-        if (response.ok) {
-          alert("Databasen har återställts");
-        } else {
-          throw new Error("Något gick fel");
+  export default {
+    methods: {
+      async resetDb() {
+        try {
+          const response = await fetch('http://localhost:3000/adminReset', {
+            method: 'POST'
+          })
+          if (response.ok) {
+            alert('Database reset')
+            location.reload()
+          } else {
+            throw new Error('Something went wrong')
+          }
+        } catch (error) {
+          console.error(error)
+          alert('Something went wrong')
         }
-      } catch (error) {
-        console.error(error);
-        alert("Något gick fet");
       }
-    },
-  },
-};
+    }
+  }
 </script>
 
 <template>
-
-<div>
-  <button @click="resetDb()">Reset Database</button>
-</div>
+  <div id="reset">
+    <input
+      class="btn-btn-primary"
+      @click="resetDb()"
+      type="button"
+      value="Reset Database"
+    />
+  </div>
 </template>
+<style scoped>
+  .btn-btn-primary {
+    padding: 5px 10px 5px 10px;
+    font-size: 20px;
+    line-height: 30px;
+    border: none;
+    border-radius: 40px;
+    background-color: #414a4c;
+    color: #dddada;
+  }
+  #reset {
+    background-color: #414a4c;
+    height: 50px;
+  }
+</style>
