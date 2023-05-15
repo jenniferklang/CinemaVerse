@@ -1,5 +1,6 @@
 <template>
   <NavbarComponent />
+  <BookComponent />
   <div id="description">
     <h1 id="movieName">{{ movie.movieName }}</h1>
     <p class="descriptionText">Duration: {{ movie.movieLengthMin }} minutes</p>
@@ -17,10 +18,13 @@
 </template>
 
 <script>
+  // import BookComponent from '../components/BookComponent.vue'
   import BookingFile from './BookingFile.vue'
+
   export default {
     components: {
-      BookingFile
+      BookingFile,
+      // BookComponent
     },
     created() {
       this.$watch(

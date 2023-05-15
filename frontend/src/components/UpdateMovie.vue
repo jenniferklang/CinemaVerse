@@ -96,11 +96,9 @@
           {{ rating }}
         </option>
       </select>
-      <br />
-    </form>
-  </div>
 
-  <div class="updatemovie">
+
+
     <input class="btn-btn-primary" type="submit" value="Update rating" />
 
     <input
@@ -109,6 +107,7 @@
       type="button"
       value="Delete Movie"
     />
+  </form>
   </div>
 </template>
 <style scoped>
