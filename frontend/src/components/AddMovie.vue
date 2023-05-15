@@ -137,7 +137,7 @@
           .then((response) => response.json())
           .then((result) => {
             this.movies = result
-            console.log(this.movies)
+            console.log(this.movies.length)
           })
       },
 
@@ -150,7 +150,7 @@
             movieSaloonId: this.saloon,
             movieRatingId: this.rating,
             movieImg: this.img,
-            movieGenreMId: this.movies.length,
+            movieGenreMId: this.movies.length + 1,
             movieGenreGId: this.genre
           }),
           headers: {

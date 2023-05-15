@@ -8,19 +8,13 @@
       @selected="parentfunctionSelectedhandler"
       :disabled-dates="disabledDates"
     />
-    {{
-      date.toLocaleDateString('sv-SE', {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric'
-      })
-    }}
-    {{ saloon }}
+
     <!-- {{ disabledDates.dates }} -->
     <button type="button" class="btn btn-outline-success" @click="postDate">
       Boka datum
     </button>
   </div>
+  <RouterView />
 </template>
 <script>
   // import { json } from 'stream/consumers'
@@ -37,10 +31,15 @@
             'Content-Type': 'application/json'
           },
           method: 'post',
-          body: JSON.stringify({ date: this.date, saloon: this.saloon })
+          body: JSON.stringify({
+            date: this.date,
+            saloon: this.saloon,
+            movie: this.movie
+          })
         })
         console.log(response)
         this.getDate()
+        this.$router.push('/confirmation')
       },
       async getDate() {
         const response = await fetch('http://localhost:3000/bookings')
@@ -75,19 +74,25 @@
       saloon: {
         default: 'saloon',
         type: String
+      },
+      movie: {
+        default: 'movie',
+        type: String
       }
     }
   }
 </script>
 
-<style>
+<style scoped>
   #datePickerBox {
-    width: 80%;
-    margin-left: 9%;
+    /* width: 80%; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
   .btn {
-    width: 90%;
-    margin: 10% 0 10% 5%;
-
+    width: 70%;
+    margin: 5%;
   }
 </style>

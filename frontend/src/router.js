@@ -6,6 +6,8 @@ import AdminView from './views/AdminView.vue'
 import AboutView from './views/AboutView.vue'
 import ContactView from './views/ContactView.vue'
 import AllMoviesView from './views/MoviesView.vue'
+import BookingConfirmation from './components/BookingConfirmation.vue'
+import CancelView from './views/CancelView.vue'
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -33,6 +35,14 @@ export default createRouter({
     {
       component: AllMoviesView,
       path: '/movies'
+    },
+    {
+      path: '/confirmation',
+      component: BookingConfirmation
+    },
+    {
+      path: '/cancel',
+      component: CancelView
     }
   ]
 })

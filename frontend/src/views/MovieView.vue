@@ -1,17 +1,17 @@
 <script>
   import MovieComponent from '../components/MovieComponent.vue'
-  import BuyTicketsComponent from '../components/BuyTicketsComponent.vue';
+  import BookComponent from '../components/BookComponent.vue';
 
   export default {
     components: {
       MovieComponent,
-      BuyTicketsComponent
+      BookComponent
     }
   }
 </script>
 <template>
 
-  <BuyTicketsComponent />
+  <BookComponent />
   <MovieComponent />
 
 </template>
