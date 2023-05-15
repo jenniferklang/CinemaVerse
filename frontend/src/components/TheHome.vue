@@ -54,7 +54,7 @@
   }
 
   #slide-container {
-    min-height: 100vh;
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
