@@ -9,9 +9,11 @@
     </p>
     <p class="descriptionText">Rating: {{ movie.ratingNumber }}</p>
     <p class="descriptionText">Genre: {{ movie.genreName }}</p>
-    <img id="moviePicture" :src="movie.movieImg" :alt="movie.movieName" />
+    <div id="img-container">
+      <img id="moviePicture" :src="movie.movieImg" :alt="movie.movieName" />
+    </div>
   </div>
-  <BookingFile :saloon="movie.saloonName" />
+  <BookingFile :movie="movie.movieName" :saloon="movie.saloonName" />
 </template>
 
 <script>
@@ -62,9 +64,16 @@
     width: 90%;
     margin-left: 5%;
   }
+
+  #img-container {
+    display: flex;
+    justify-content: center;
+  }
+
   #moviePicture {
-    width: 90%;
-    margin-left: 5%;
+    max-width: 90%;
+
+    /* margin-left: 5%; */
     margin-bottom: 10%;
   }
 </style>
