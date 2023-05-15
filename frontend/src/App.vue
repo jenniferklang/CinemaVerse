@@ -38,5 +38,8 @@
 
     border-radius: 40px;
   }
+
+  span {
+    color: black;
+  }
 </style>
--->

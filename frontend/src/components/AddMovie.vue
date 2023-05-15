@@ -137,7 +137,7 @@
           .then((response) => response.json())
           .then((result) => {
             this.movies = result
-            console.log(this.movies)
+            console.log(this.movies.length)
           })
       },
 

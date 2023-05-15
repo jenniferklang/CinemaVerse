@@ -1,5 +1,6 @@
 <template>
   <NavbarComponent />
+  <BookComponent />
   <div id="description">
     <h1 id="movieName">{{ movie.movieName }}</h1>
     <p class="descriptionText">Duration: {{ movie.movieLengthMin }} minutes</p>
@@ -9,16 +10,21 @@
     </p>
     <p class="descriptionText">Rating: {{ movie.ratingNumber }}</p>
     <p class="descriptionText">Genre: {{ movie.genreName }}</p>
-    <img id="moviePicture" :src="movie.movieImg" :alt="movie.movieName" />
+    <div id="img-container">
+      <img id="moviePicture" :src="movie.movieImg" :alt="movie.movieName" />
+    </div>
   </div>
-  <BookingFile :saloon="movie.saloonName" />
+  <BookingFile :movie="movie.movieName" :saloon="movie.saloonName" />
 </template>
 
 <script>
+  // import BookComponent from '../components/BookComponent.vue'
   import BookingFile from './BookingFile.vue'
+
   export default {
     components: {
-      BookingFile
+      BookingFile,
+      // BookComponent
     },
     created() {
       this.$watch(
@@ -62,9 +68,16 @@
     width: 90%;
     margin-left: 5%;
   }
+
+  #img-container {
+    display: flex;
+    justify-content: center;
+  }
+
   #moviePicture {
-    width: 90%;
-    margin-left: 5%;
+    max-width: 90%;
+
+    /* margin-left: 5%; */
     margin-bottom: 10%;
   }
 </style>
