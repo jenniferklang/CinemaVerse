@@ -24,11 +24,13 @@ const corsOptions = {
 //   LEFT JOIN rating ON movie.movieRatingId = rating.ratingId;
 
 router.get('/movie', async (req, res) => {
-  let sql = `SELECT *, GROUP_CONCAT(genre.genreName) FROM movie
-  INNER JOIN movieGenre ON movieGenre.movieGenreMId = movie.movieId
-  INNER JOIN genre ON genre.genreId = movieGenre.movieGenreGId
-  INNER JOIN saloon s on movie.movieSaloonId = s.saloonId
-  INNER JOIN rating ON movie.movieRatingId = rating.ratingId
+  let sql = `SELECT DISTINCT movie. *, GROUP_CONCAT(genre.genreName) AS genres,
+  rating.ratingNumber
+  FROM movie
+  INNER JOIN movieGenre ON movie.movieId = movieGenre.movieGenreMId
+  INNER JOIN genre ON movieGenre.movieGenreGId = genre.genreId
+  LEFT JOIN saloon ON movie.movieSaloonId = saloon.saloonId
+  LEFT JOIN rating ON movie.movieRatingId = rating.ratingId
   GROUP BY movie.movieId;`
   try {
     connection.query(sql, (error, results, fields) => {
