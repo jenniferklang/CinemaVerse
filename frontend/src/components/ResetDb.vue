@@ -40,6 +40,8 @@
     border-radius: 40px;
     background-color: #414a4c;
     color: #dddada;
+    margin-left: 30%;
+
   }
   #reset {
     background-color: #414a4c;

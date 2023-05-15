@@ -83,6 +83,7 @@
   <div class="updatemovie">
     <form @submit="updateMovieRating">
       <select v-model="selectedMovieId">
+        <option value="Select Movie" disabled selected>Select Movie</option>
         <option
           v-for="movie in movies"
           :key="movie.movieId"
@@ -92,6 +93,7 @@
         </option>
       </select>
       <select v-model="selectedMovieRating">
+        <option value="Rating" disabled selected>Rating</option>
         <option v-for="rating in ratings" :key="rating" :value="rating">
           {{ rating }}
         </option>
@@ -118,10 +120,11 @@
     border-radius: 10px;
     background-color: #414a4c;
     color: #dddada;
+    margin-left: 25px;
   }
   select {
-    margin: 0 40px 0 20px;
-    font-size: 20px;
+    margin: 0 40px 20px 20px;
+    font-size: 16px;
     line-height: 30px;
     border: none;
     border-radius: 10px;

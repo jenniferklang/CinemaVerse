@@ -11,6 +11,7 @@
     height: 50px;
     border-color: white;
     border-top: 5px;
+    margin-left: 30%
   }
 
   .btn-btn-primary {
