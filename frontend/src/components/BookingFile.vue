@@ -10,7 +10,7 @@
     />
 
     <!-- {{ disabledDates.dates }} -->
-    <button type="button" class="btn btn-outline-success" @click="postDate">
+    <button type="button" class="btn-btn-primary" @click="postDate">
       Boka datum
     </button>
   </div>
@@ -91,8 +91,11 @@
     flex-direction: column;
     align-items: center;
   }
-  .btn {
+  .btn-btn-primary {
     width: 70%;
     margin: 5%;
+    background-color: #414a4c;
+    color: #dddada;
+    border-radius: 10px;
   }
 </style>

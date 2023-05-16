@@ -1,6 +1,6 @@
 <template>
   <!-- §<a @click="v-scroll-to='#buttonBTN'"> -->
-  <button @click="scrollToComponent" class="btn">BOOK</button>
+  <button @click="scrollToComponent" class="btn-btn-primary">BOOK</button>
   <!-- </a> -->
 </template>
 
@@ -19,7 +19,7 @@
 </script>
 
 <style scoped>
-  .btn {
+  .btn-btn-primary {
     width: 90%;
     margin-left: 5%;
     background-color: #414a4c;
