@@ -42,4 +42,11 @@
   span {
     color: black;
   }
+
+  section.vuejs3-datepicker__calendar-topbar {
+    background-color: #414a4c;
+  }
+  .vuejs3-datepicker__calendar .cell.selected {
+    background: #414a4c !important;
+  }
 </style>
